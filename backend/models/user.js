@@ -13,7 +13,6 @@ const userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true
   },
   //Email
   email: {
@@ -29,9 +28,9 @@ const userSchema = new Schema({
   //Register date
   registered_date: {
     type: Date,
-    default: Date.now
+    required: true
   },
-  //when was user last logged in 
+  //when was user last logged in
   last_logged_in: {
     type: Date,
     default: Date.now
@@ -40,6 +39,6 @@ const userSchema = new Schema({
 
 userSchema.plugin(passportLocalMongoose);
 
-const User = mongoose.model("users", UserSchema);
+const User = mongoose.model("users", userSchema);
 
 module.exports = User;

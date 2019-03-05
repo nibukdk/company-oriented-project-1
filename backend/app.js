@@ -13,9 +13,11 @@ const express = require("express"),
 const PORT = 8080;
 
 //Import Routes
-const adminRoutes = require("./routes/api/admin/admin"),
-  clientRoutes = require("./routes/api/client/client"),
-  movieRoutes = require("./routes/api/movies/movies");
+const adminRoutes = require("./routes/admin/admin"),
+  clientRoutes = require("./routes/client/client"),
+  loginRoute = require("./routes/authRoute/login"),
+  registerRoute = require("./routes/authRoute/register"),
+  movieRoutes = require("./routes/movies/movies");
 
 //Deine static files path
 app.use(express.static(__dirname + "/public/"));
@@ -87,9 +89,11 @@ app.get("/", (req, res) => {
 });
 
 // All routes are started from here
-app.use("/api/admin", adminRoutes);
-app.use("/api/client", clientRoutes);
-app.use("/api/movies", movieRoutes);
+app.use("/admin", adminRoutes);
+app.use("/client", clientRoutes);
+app.use("/movies", movieRoutes);
+app.use("/login", loginRoute);
+app.use("/register", registerRoute);
 
 //Listen to port
 app.listen(PORT || process.env.PORT, err => {
