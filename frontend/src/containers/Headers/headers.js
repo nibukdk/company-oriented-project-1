@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Classes from "./headers.css";
+import WithClass from "../../HOC/ReactAux";
 
 class Headers extends Component {
   render() {
     return (
-      <div>
+      <WithClass className="">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand" href="#">
             Watch Movie
@@ -161,7 +162,7 @@ class Headers extends Component {
             </div>
           </div>{" "}
         </div>
-      </div>
+      </WithClass>
     );
   }
 }
