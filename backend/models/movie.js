@@ -55,10 +55,14 @@ const movieSchema = new Schema({
     type: Date,
     default: Date.now,
     required: true
-  }, 
-  url:{
-    type:String,
-    required:true
+  },
+  source_url: {
+    type: String,
+    required: true
+  },
+  image_url: {
+    type: String,
+   
   }
 });
 

@@ -19,7 +19,8 @@ router.post("/new-movie", (req, res) => {
     (newMovie.title = req.body.title),
       (newMovie.genre = req.body.genre.split(",")),
       (newMovie.description = req.body.description),
-      (newMovie.url = req.body.url),
+      (newMovie.source_url = req.body.source_url),
+      (newMovie.image_url = req.body.image_url),
       (newMovie.uploaded_date = Date.now()),
       (newMovie.released_date = req.body.released_date);
 
@@ -43,7 +44,8 @@ router.put("/edit/:id", (req, res) => {
     (updatedMovie.title = req.body.title),
       (updatedMovie.genre = req.body.genre.split(",")),
       (updatedMovie.description = req.body.description),
-      (updatedMovie.url = req.body.url),
+      (updatedMovie.source_url = req.body.source_url),
+      (updatedMovie.image_url = req.body.image_url),
       (updatedMovie.uploaded_date = Date.now()),
       (updatedMovie.released_date = req.body.released_date);
 

@@ -60,6 +60,7 @@ app.use(
 
 //Prevent back button after logout
 app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*']);
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.header("Expires", "-1");
   res.header("Pragma", "no-cache");
@@ -86,7 +87,7 @@ mongoose
 //   next();
 // });
 
-app.get("/", (req, res) => {
+app.get("/home", (req, res) => {
   Movie.find({})
     .then(movie => {
       if (movie) {
