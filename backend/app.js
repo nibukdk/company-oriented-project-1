@@ -8,6 +8,8 @@ const express = require("express"),
   path = require("path"),
   flash = require("connect-flash"),
   app = express();
+//Import Models
+const Movie = require("./models/movie");
 
 //Set port for local server
 const PORT = 8080;
@@ -85,7 +87,15 @@ mongoose
 // });
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  Movie.find({})
+    .then(movie => {
+      if (movie) {
+        res.status(200).json(movie);
+      } else {
+        res.status(200).json({ Msg: "No Movie Found" });
+      }
+    })
+    .catch(err => res.status(400).json(err));
 });
 
 // All routes are started from here
