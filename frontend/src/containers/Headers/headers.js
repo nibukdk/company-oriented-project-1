@@ -6,7 +6,7 @@ import { Route, Link } from "react-router-dom";
 class Headers extends Component {
   render() {
     return (
-      <WithClass className="">
+      <WithClass className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <Link className="navbar-brand" to="#">
             Watch Movie
@@ -54,7 +54,6 @@ class Headers extends Component {
                 </a>
                 <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <Link className="dropdown-item" to="#">
-
                     Action
                   </Link>
                   <Link className="dropdown-item" to="#">
@@ -82,7 +81,6 @@ class Headers extends Component {
               </button>
             </form>
           </div>
-         
         </nav>
 
         <div className={Classes.Header_Carousel}>

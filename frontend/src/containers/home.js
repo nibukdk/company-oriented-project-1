@@ -13,7 +13,7 @@ class Home extends Component {
   render() {
     return (
       <WithClass>
-        <Headers />  
+        <Headers />
         <Route path="/" exact component={Main} />
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />

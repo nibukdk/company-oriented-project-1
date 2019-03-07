@@ -8,6 +8,7 @@ class Footers extends Component {
           Copyright &copy {new Date().getFullYear()} MovieWatch
         </footer>
       </div>
+      
     );
   }
 }
