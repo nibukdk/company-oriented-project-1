@@ -3,7 +3,7 @@ import WithClass from "../../HOC/ReactAux";
 import Classes from "./main.css";
 import axios from "axios";
 //Import Inner COmponents
-import FilterGenre from "../../components/FilterGenre/filterGenre";
+import FilterGenre from "../../components/FilterGenre/filter";
 import TopPicks from "../../components/TopPicks/topPicks";
 import Movie from "../../components/Movie/movie";
 // import axios from "../../axiosConfig";
@@ -21,9 +21,6 @@ class Main extends Component {
         const newState = { ...this.state };
         newState.movie = [...movies["data"]];
         newState.hasMovie = true;
-        // let movieList = [...this.state.movie];
-        // movieList = [...movies["data"]];
-        // this.setState({ movie: movieList, hasMovie: true });
         this.setState(newState);
       })
       .catch(err => console.log(err));

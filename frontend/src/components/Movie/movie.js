@@ -30,6 +30,8 @@ class Movie extends Component {
             dislikes={movie.dislikes}
             upload_date={movie.upload_date}
             id={movie._id}
+            source_url={movie.source_url}
+            uploaded_by={movie.uploaded_by}
             img={movie.image}
           />
         );
