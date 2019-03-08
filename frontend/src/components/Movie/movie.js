@@ -10,7 +10,6 @@ class Movie extends Component {
   };
 
   render() {
-    console.log(this.state.movies);
     let movieItem = (
       <div className="container">
         <div className="row">
@@ -39,9 +38,7 @@ class Movie extends Component {
 
     return (
       <WithClass>
-        <div className="container">
-          <div className="row">{movieItem}</div>
-        </div>
+        <div className="row">{movieItem}</div>
       </WithClass>
     );
   }
