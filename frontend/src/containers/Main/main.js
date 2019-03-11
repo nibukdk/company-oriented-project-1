@@ -11,7 +11,8 @@ import Movie from "../../components/Movie/movie";
 class Main extends Component {
   state = {
     movie: [],
-    hasMovie: false
+    hasMovie: false,
+    topPicks: []
   };
 
   componentDidMount() {
@@ -21,6 +22,12 @@ class Main extends Component {
         const newState = { ...this.state };
         newState.movie = [...movies["data"]];
         newState.hasMovie = true;
+        let i = 0;
+        while (newState.topPicks.length <= 5) {
+          newState.topPicks.push(movies.data[i]);
+
+          i++;
+        }
         this.setState(newState);
       })
       .catch(err => console.log(err));
@@ -29,6 +36,7 @@ class Main extends Component {
   // ListOfMovies = () => {};
   render() {
     let MovieList = <p>There is no movie to fetch</p>;
+
     if (this.state.hasMovie) {
       MovieList = <Movie movieList={this.state.movie} />;
     }
@@ -36,12 +44,12 @@ class Main extends Component {
     return (
       <WithClass>
         <div className="row">
-          <div className="col-lg-12 col-3">
+          <div className="col-12 ">
             <FilterGenre />
           </div>
           <div className="col-lg-10 col-7">{MovieList} </div>
-          <div className="col-2">
-            <TopPicks />
+          <div className="col-lg-2 col-5">
+            <TopPicks topPicks={this.state.topPicks} />
           </div>
         </div>
       </WithClass>
