@@ -1,0 +1,12 @@
+.TopPicks_Card {
+  text-align: center;
+  margin: 0 auto;
+  padding: 5px;
+  width: 100%;
+  align-items: center;
+}
+
+.Image {
+  width: 80%;
+  height: 80%;
+}
