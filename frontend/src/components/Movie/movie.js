@@ -32,7 +32,7 @@ class Movie extends Component {
             id={movie._id}
             source_url={movie.source_url}
             uploaded_by={movie.uploaded_by}
-            img={movie.image}
+            img={movie.image_url}
           />
         );
       });
