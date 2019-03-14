@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import WithClass from "../../HOC/ReactAux";
+// import WithClass from "../../HOC/ReactAux";
 import GenreDropDown from "./Dropdowns/genreDropdown";
 import YearDropDown from "./Dropdowns/yearDropdown";
 
-import Classes from "./filter.css";
+// import Classes from "./filter.css";
 import Col from "react-bootstrap/Col";
 import { Row } from "react-bootstrap";
 // import axios from "../../axiosConfig";
@@ -49,7 +49,7 @@ class FilterGenre extends Component {
 
   render() {
     return (
-      <Row className={Classes.Filter}>
+      <Row>
         <Col lg={4}>
           <GenreDropDown
             genreSelectHandler={() => this.onSelectDispalyGenreHandler}

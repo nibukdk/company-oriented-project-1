@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import WithClass from "../../HOC/ReactAux";
-import Classes from "./main.css";
+// import WithClass from "../../HOC/ReactAux";
+// import Classes from "./main.css";
 import axios from "axios";
 //Import Inner COmponents
 import FilterGenre from "../../components/FilterGenre/filter";

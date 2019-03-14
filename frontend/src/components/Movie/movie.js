@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import MovieItem from "./MovieItem/movieItem";
 import WithClass from "../../HOC/ReactAux";
 
-import Classes from "./movie.css";
+// import Classes from "./movie.css";
 
 class Movie extends Component {
   state = {

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import WithClass from "../../../HOC/ReactAux";
 import Classes from "./movieItem.css";
 
@@ -11,7 +11,7 @@ const movieItem = props => {
         )}
         style={{ width: 18 + "rem" }}
       >
-        <img className="card-img-top" src={props.img} alt="Card image cap" />
+        <img className="card-img-top" src={props.img} alt={props.title} />
         <div className="card-body">
           <h5 className="card-title">Movie Name</h5>
           <p className="card-text text-truncate">{props.desc}</p>

@@ -1,15 +1,17 @@
 import React from "react";
-import WithClass from "../../HOC/ReactAux";
-import { Route, Link } from "react-router-dom";
+// import WithClass from "../../HOC/ReactAux";
+import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import FormControl from "react-bootstrap/FormControl";
+// import Form from "react-bootstrap/Form";
+// import Button from "react-bootstrap/Button";
+// import FormControl from "react-bootstrap/FormControl";
 
 import Classes from "./nav.css";
+// import WithClass from "../../HOC/ReactAux";
 const nav = props => {
   return (
+    
     <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className={Classes.Navbar}>
       <Navbar.Brand>
         <Link className="nav-link" to="/">

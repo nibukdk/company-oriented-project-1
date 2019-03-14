@@ -18,6 +18,7 @@ class TopPicks extends Component {
                 <img
                   src={movie.image_url}
                   className={"img-responsive ".concat(Classes.Image)}
+                  alt={movie.title}
                 />
                 {movie.title}
               </li>

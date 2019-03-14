@@ -1,4 +1,9 @@
 .Footer {
-  padding: none;
-  margin: none;
+  margin: 0px;
+  padding: 0px;
+  min-width: 100%;
+  max-width: 100%;
+  color: #fff;
+  height: auto;
+  min-height: 20px;
 }

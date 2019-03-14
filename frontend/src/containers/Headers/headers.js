@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import Classes from "./headers.css";
+// import Classes from "./headers.css";
 import WithClass from "../../HOC/ReactAux";
 import NavContainer from "../../components/Nav/nav";
 import Carousel from "../../components/carousel/carousel";
 import axios from "axios";
+
+import { Route } from "react-router-dom";
 
 class Headers extends Component {
   state = {
@@ -23,9 +25,15 @@ class Headers extends Component {
   }
   render() {
     return (
-      <WithClass className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+      <WithClass >
         <NavContainer />
-        <Carousel carouselMovies={this.state.carouselMovies} />
+        <Route
+          path="/"
+          exact
+          render={props => (
+            <Carousel carouselMovies={this.state.carouselMovies} {...props} />
+          )}
+        />
       </WithClass>
     );
   }

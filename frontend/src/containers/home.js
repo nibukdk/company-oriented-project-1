@@ -16,15 +16,15 @@ class Home extends Component {
     return (
       <Container fluid="true">
         <Row>
-          <Col lg={12}>
+          <Col lg={12} className={Classes.Navbar}>
             <Headers />
           </Col>
-          <Col lg={12}>
+          <Col lg={12} className={Classes.Navbar}>
             <Route path="/" exact component={Main} />
-            {/* <Route path="/login" exact component={Login} />
-          <Route path="/register" exact component={Register} /> */}
+            <Route path="/login" exact component={Login} />
+            <Route path="/register" exact component={Register} />
           </Col>
-          <Col lg={12}>
+          <Col lg={12}  >
             <Footers />
           </Col>
         </Row>
