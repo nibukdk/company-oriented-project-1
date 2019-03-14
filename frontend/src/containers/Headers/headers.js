@@ -23,11 +23,10 @@ class Headers extends Component {
   }
   render() {
     return (
-      <NavContainer />
-      // <WithClass className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-       
-      //   {/* <Carousel carouselMovies={this.state.carouselMovies} /> */}
-      // </WithClass>
+      <WithClass className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <NavContainer />
+        <Carousel carouselMovies={this.state.carouselMovies} />
+      </WithClass>
     );
   }
 }
