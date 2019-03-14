@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import MovieItem from "./MovieItem/movieItem";
 import WithClass from "../../HOC/ReactAux";
 
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+
 // import Classes from "./movie.css";
 
 class Movie extends Component {
@@ -11,11 +14,11 @@ class Movie extends Component {
 
   render() {
     let movieItem = (
-      <div className="container">
-        <div className="row">
+      <Container>
+        <Row>
           <p>No movies to Dispaly</p>
-        </div>
-      </div>
+        </Row>
+      </Container>
     );
     if (this.state.movies) {
       movieItem = this.state.movies.map(movie => {
@@ -39,9 +42,9 @@ class Movie extends Component {
     }
 
     return (
-      <WithClass>
-        <div className="row">{movieItem}</div>
-      </WithClass>
+      <Container>
+        <Row>{movieItem}</Row>
+      </Container>
     );
   }
 }

@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import WithClass from "../../HOC/ReactAux";
 import Classes from "./topPicks.css";
+import Card from "react-bootstrap/Card";
+// import Col from "react-bootstrap/Col";
+import ListGroup from "react-bootstrap/ListGroup";
+
 class TopPicks extends Component {
   state = {
     topMoviePicks: this.props.topPicks
@@ -10,21 +14,20 @@ class TopPicks extends Component {
     let topMovies = <p>No TopPicks Available</p>;
     if (this.state.topMoviePicks) {
       topMovies = (
-        <div className={"card ".concat(Classes.TopPicks_Card)}>
-          <div className="card-header">TOP PICKS</div>
-          <ul className="list-group list-group-flush">
+        <Card className={"card ".concat(Classes.TopPicks_Card)}>
+          <ListGroup variant="flush">
             {this.state.topMoviePicks.map(movie => (
-              <li key={movie._id} className="list-group-item">
+              <ListGroup.Item key={movie._id}>
                 <img
                   src={movie.image_url}
                   className={"img-responsive ".concat(Classes.Image)}
                   alt={movie.title}
                 />
                 {movie.title}
-              </li>
+              </ListGroup.Item>
             ))}
-          </ul>
-        </div>
+          </ListGroup>
+        </Card>
       );
     }
     return <WithClass>{topMovies}</WithClass>;
