@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import WithClass from "../../HOC/ReactAux";
 import GenreDropDown from "./Dropdowns/genreDropdown";
 import YearDropDown from "./Dropdowns/yearDropdown";
+
+import Classes from "./filter.css";
+import Col from "react-bootstrap/Col";
+import { Row } from "react-bootstrap";
+// import axios from "../../axiosConfig";
 class FilterGenre extends Component {
   state = {
     displayGenreDropdown: false,
@@ -44,27 +49,25 @@ class FilterGenre extends Component {
 
   render() {
     return (
-      <WithClass>
-        <div className="row">
-          <div className="col-4">
-            <GenreDropDown
-              genreSelectHandler={() => this.onSelectDispalyGenreHandler}
-              displayGenre={this.state.displayGenreDropdown}
-              selectGenre={e => this.onSelectGenreHandler}
-            />
-          </div>
-          <div className="col-4">
-            <YearDropDown
-              yearSelectHandler={() => this.onSelectDispalyYearHandler}
-              displayYear={this.state.displayYearDropdown}
-              selectYear={e => this.onSelectYearHandler}
-            />
-          </div>
-          <div className="col-4">
-            <button className="btn btn-primary btn-lg"> Filter</button>
-          </div>
-        </div>
-      </WithClass>
+      <Row className={Classes.Filter}>
+        <Col lg={4}>
+          <GenreDropDown
+            genreSelectHandler={() => this.onSelectDispalyGenreHandler}
+            displayGenre={this.state.displayGenreDropdown}
+            selectGenre={e => this.onSelectGenreHandler}
+          />
+        </Col>
+        <Col lg={4}>
+          <YearDropDown
+            yearSelectHandler={() => this.onSelectDispalyYearHandler}
+            displayYear={this.state.displayYearDropdown}
+            selectYear={e => this.onSelectYearHandler}
+          />
+        </Col>
+        <Col lg={4}>
+          <button className="btn btn-primary btn-lg"> Filter</button>
+        </Col>
+      </Row>
     );
   }
 }

@@ -6,6 +6,8 @@ import axios from "axios";
 import FilterGenre from "../../components/FilterGenre/filter";
 import TopPicks from "../../components/TopPicks/topPicks";
 import Movie from "../../components/Movie/movie";
+import Col from "react-bootstrap/Col";
+import { Row } from "react-bootstrap";
 // import axios from "../../axiosConfig";
 
 class Main extends Component {
@@ -42,17 +44,15 @@ class Main extends Component {
     }
 
     return (
-      <WithClass>
-        <div className="row">
-          <div className="col-12 ">
-            <FilterGenre />
-          </div>
-          <div className="col-lg-10 col-7">{MovieList} </div>
-          <div className="col-lg-2 col-5">
-            <TopPicks topPicks={this.state.topPicks} />
-          </div>
-        </div>
-      </WithClass>
+      <Row>
+        <Col lg={12}>
+          <FilterGenre />
+        </Col>
+        <Col lg={10}>{MovieList}</Col>
+        <Col lg={2} sm={12}>
+          <TopPicks topPicks={this.state.topPicks} />
+        </Col>
+      </Row>
     );
   }
 }

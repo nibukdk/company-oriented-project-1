@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import Classes from "./headers.css";
 import WithClass from "../../HOC/ReactAux";
-import Nav from "../../components/Nav/nav";
+import NavContainer from "../../components/Nav/nav";
 import Carousel from "../../components/carousel/carousel";
 import axios from "axios";
+
 class Headers extends Component {
   state = {
     carouselMovies: [],
@@ -21,12 +22,12 @@ class Headers extends Component {
       .catch(err => console.log(err));
   }
   render() {
-    
     return (
-      <WithClass className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-        <Nav />
-        <Carousel carouselMovies={this.state.carouselMovies} />
-      </WithClass>
+      <NavContainer />
+      // <WithClass className="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+       
+      //   {/* <Carousel carouselMovies={this.state.carouselMovies} /> */}
+      // </WithClass>
     );
   }
 }
