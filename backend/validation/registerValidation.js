@@ -28,7 +28,7 @@ module.exports = validateRegisterInput = data => {
   //     isOnList = false;
   // }
 
-  //Validation for Name field 
+  //Validation for Name field
   if (!validator.isLength(data.name, { min: 2, max: 30 })) {
     errors.name = "Name must be between 2 to 30 characters.";
   }
@@ -60,6 +60,7 @@ module.exports = validateRegisterInput = data => {
     errors.password = "Password  must be atleast  6 characters.";
   }
   //Validation for Password confirmation field
+
   if (validator.isEmpty(data.password2)) {
     errors.password2 = "Confirm password field is required";
   }

@@ -1,76 +1,74 @@
 import React from "react";
+import Form from "react-bootstrap/Form";
 
 const input = props => {
-  let inputElement = null;
+  let inputElement = null,
+    nameOfInpType =
+      props.elName.charAt(0).toUpperCase() + props.elName.slice(1);
   switch (props.elType) {
     case "text":
       inputElement = (
-        <div className={props.divClass}>
-          <label htmlFor={props.elName}>{props.elName.toUpperCase()}</label>
-          <input
+        <Form.Group controlId="formBasicText">
+          <Form.Label>{nameOfInpType}</Form.Label>
+          <Form.Control
             type="text"
+            placeholder={nameOfInpType}
             name={props.elName}
             value={props.elValue}
-            id={props.elName}
-            placeholder={props.elName.toUpperCase()}
-            className={props.className}
+            onChange={props.changed}
           />
-        </div>
+        </Form.Group>
       );
       break;
 
     case "password":
       inputElement = (
-        <div className={props.divClass}>
-          <label htmlFor={props.elName}>{props.elName.toUpperCase()}</label>
-          <input
+        <Form.Group controlId="formBasicPassword">
+          <Form.Label> {nameOfInpType} </Form.Label>
+          <Form.Control
             type="password"
+            placeholder={nameOfInpType}
             name={props.elName}
             value={props.elValue}
-            id={props.elName}
-            placeholder={props.elName.toUpperCase()}
-            className={props.className}
+            onChange={props.changed}
           />
-        </div>
+        </Form.Group>
       );
       break;
     case "email":
       inputElement = (
-        <div className={props.divClass}>
-          <label htmlFor={props.elName}>{props.elName.toUpperCase()}</label>
-          <input
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label> {nameOfInpType} </Form.Label>
+          <Form.Control
             type="email"
+            placeholder={nameOfInpType}
             name={props.elName}
             value={props.elValue}
-            id={props.elName}
-            placeholder={props.elName.toUpperCase()}
-            className={props.className}
+            onChange={props.changed}
           />
-        </div>
+        </Form.Group>
       );
       break;
     case "checkbox":
       inputElement = (
-        <div className={props.divClass}>
-          <label htmlFor={props.elName}>{props.elName.toUpperCase()}</label>
-          <input
+        <Form.Group controlId="formBasicCheckbox">
+          <Form.Label> {nameOfInpType} </Form.Label>
+          <Form.Control
             type="checkbox"
+            placeholder={nameOfInpType}
             name={props.elName}
             value={props.elValue}
-            id={props.elName}
-            className={props.className}
+            onChange={props.changed}
           />
-        </div>
+        </Form.Group>
       );
       break;
     case "textarea":
       inputElement = (
-        <div className={props.divClass}>
-          <label htmlFor={props.elName}>{props.elName.toUpperCase()}</label>
-          <textarea name={props.elName} id={props.elName}>
-            {props.elValue}
-          </textarea>
-        </div>
+        <Form.Group controlId="formBasicTextarea">
+          <Form.Label> {nameOfInpType} </Form.Label>
+          <Form.Control name={props.elName} onChange={props.changed} rows="3" />
+        </Form.Group>
       );
       break;
     default:

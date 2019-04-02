@@ -81,11 +81,11 @@ mongoose
   .then(success => console.log("Connected to Db", db.toUpperCase()))
   .catch(err => console.log(err));
 
-// //Get current user
-// app.use((req, res, next) => {
-//   res.locals.user = req.user;
-//   next();
-// });
+//Get current user
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
 
 app.get("/home", (req, res) => {
   Movie.find({})

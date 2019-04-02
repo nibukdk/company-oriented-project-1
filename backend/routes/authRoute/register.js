@@ -4,6 +4,12 @@ const express = require("express"),
 // Model Import
 const User = require("../../models/user");
 
+//Get current user
+router.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
+});
+
 //Import Vaidation
 const validateRegisterInput = require("../../validation/registerValidation");
 
@@ -43,18 +49,20 @@ router.post("/", (req, res) => {
                   if (err) {
                     return res.status(400).json(err);
                   }
-
-                  return res.status(200).json(newUser);
+                  console.log(req.user);
+                  return res
+                    .status(200)
+                    .json({ success: "User Is Registered" });
                 });
               }
             })
             .catch(err => {
-              throw err;
+              res.status(400).json(err);
             });
         }
       })
       .catch(err => {
-        throw err;
+        res.status(400).json(err);
       });
   } else {
     res.status(200).json(errors);
@@ -63,6 +71,5 @@ router.post("/", (req, res) => {
 
 //Register By admin
 //Providing Roles LIke admin, superadmin, normal and so on
-
 
 module.exports = router;
