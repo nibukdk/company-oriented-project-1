@@ -4,7 +4,7 @@ const validator = require("validator"),
 module.exports = validateLoginInput = data => {
   let errors = {};
 
-  data.title = !isEmpty(data.title) ? data.title : "";
+  data.username = !isEmpty(data.username) ? data.username : "";
   data.password = !isEmpty(data.password) ? data.password : "";
 
   if (validator.isEmpty(data.username)) {

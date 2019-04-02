@@ -7,6 +7,7 @@ const express = require("express"),
   LocalStrategy = require("passport-local"),
   path = require("path"),
   flash = require("connect-flash"),
+  User = require("./models/user"),
   app = express();
 //Import Models
 const Movie = require("./models/movie");
@@ -52,24 +53,40 @@ app.use(
   })
 );
 
-// app.use(passport.initialize());
-// //THis should always be declraed after express session
-// app.use(passport.session());
+app.use(passport.initialize());
+//THis should always be declraed after express session
+app.use(passport.session());
 
 // passport.use(new LocalStrategy(User.authenticate()));
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    User.findOne({ username })
+      .then(user => {
+        if (!user) {
+          return done(null, false, { msg: "Incorrect Username" });
+        } else {
+          if (!user.password === password) {
+            return done(null, false, { message: "Incorrect password." });
+          }
 
+          return done(null, user);
+        }
+      })
+      .catch(err => done(err));
+  })
+);
 //Prevent back button after logout
 app.use((req, res, next) => {
-  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append("Access-Control-Allow-Origin", ["*"]);
   res.header("Cache-Control", "private, no-cache, no-store, must-revalidate");
   res.header("Expires", "-1");
   res.header("Pragma", "no-cache");
   next();
 });
 
-// //Serialize and deserialize user
-// passport.serializeUser(User.serializeUser());
-// passport.deserializeUser(User.deserializeUser());
+//Serialize and deserialize user
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 //DB config
 
