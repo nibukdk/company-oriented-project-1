@@ -12,6 +12,9 @@ class Movie extends Component {
     movies: this.props.movieList
   };
 
+  onSourceIdClickedHandler = id => {
+    console.log('Cli')
+  };
   render() {
     let movieItem = (
       <Container>
@@ -33,9 +36,10 @@ class Movie extends Component {
             dislikes={movie.dislikes}
             upload_date={movie.upload_date}
             id={movie._id}
-            source_url={movie.source_url}
+            source_id={movie.source_id}
             uploaded_by={movie.uploaded_by}
             img={movie.image_url}
+            clicked={() => this.onSourceIdClickedHandler(movie.source_url)}
           />
         );
       });
@@ -43,7 +47,9 @@ class Movie extends Component {
 
     return (
       <Container>
-        <Row>{movieItem}</Row>
+        <Row>{movieItem}
+          {console.log(this.state.movies)}
+        </Row>
       </Container>
     );
   }
