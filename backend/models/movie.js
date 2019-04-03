@@ -56,7 +56,7 @@ const movieSchema = new Schema({
     default: Date.now,
     required: true
   },
-  source_url: {
+  source_id: {
     type: String,
     required: true
   },

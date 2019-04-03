@@ -13,7 +13,7 @@ module.exports = validateMovieInput = data => {
   data.uploaded_by = !isEmpty(data.uploaded_by) ? data.uploaded_by : "";
   data.released_date = !isEmpty(data.released_date) ? data.released_date : "";
   data.upload_date = !isEmpty(data.upload_date) ? data.upload_date : "";
-  data.source_url = !isEmpty(data.source_url) ? data.source_url : "";
+  data.source_id = !isEmpty(data.source_id) ? data.source_id : "";
   data.image_url = !isEmpty(data.image_url) ? data.image_url : "";
 
   //Check for Empty Inputs
@@ -46,13 +46,13 @@ module.exports = validateMovieInput = data => {
   //   if (validator.isEmpty(data.upload_date)) {
   //     errors.upload_date = "upload_date field is required";
   //   }
-  if (validator.isEmpty(data.source_url)) {
-    errors.source_url = "source_url field is required";
+  if (validator.isEmpty(data.source_id)) {
+    errors.source_id = "source_id field is required";
   }
 
-  if (!validator.isURL(data.source_url)) {
-    errors.source_url = "source_url field is invalid";
-  }
+  // if (!validator.isURL(data.source_id)) {
+  //   errors.source_id = "source_id field is invalid";
+  // }
 
   if (validator.isEmpty(data.image_url)) {
     errors.image_url = "image_url field is required";
