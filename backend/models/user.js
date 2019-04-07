@@ -72,7 +72,7 @@ module.exports.addUser = (newUser, cb) => {
 };
 
 //Compare the given password and given password
-module.exports.comparePassword = function(typedPassword, hash, cb) {
+module.exports.comparePassword = (typedPassword, hash, cb) => {
   bcrypt.compare(typedPassword, hash, (err, isMatched) => {
     if (err) {
       throw err;

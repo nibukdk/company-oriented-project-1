@@ -1,7 +1,6 @@
 const express = require("express"),
   router = express.Router(),
   User = require("../../models/user.js"),
-  passport = require("passport"),
   jwt = require("jsonwebtoken"),
   CONFIG = require("../../config/keys");
 const validateLoginInput = require("../../validation/loginValidation");
