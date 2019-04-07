@@ -6,9 +6,6 @@ const express = require("express"),
   CONFIG = require("../../config/keys");
 const validateLoginInput = require("../../validation/loginValidation");
 
-let passportAuthenticate = passport.authenticate("local", {
-  // failureFlash: true
-});
 router.post("/", (req, res) => {
   const { errors, isValid } = validateLoginInput(req.body);
   if (isValid) {
