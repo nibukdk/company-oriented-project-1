@@ -1,6 +1,7 @@
 const mongoose = require("mongoose"),
   passportLocalMongoose = require("passport-local-mongoose"),
-  Schema = mongoose.Schema;
+  Schema = mongoose.Schema,
+  bcrypt = require("bcryptjs");
 //Create UserSchema
 const userSchema = new Schema({
   name: {
@@ -42,3 +43,40 @@ userSchema.plugin(passportLocalMongoose);
 const User = mongoose.model("users", userSchema);
 
 module.exports = User;
+
+//Find User by userid
+module.exports.getByUserId = (id, cb) => {
+  User.findById(id, cb);
+};
+
+//Find User by username
+
+module.exports.getByUserName = (username, cb) => {
+  const query = {
+    username: username
+  };
+  User.findOne(query, cb);
+};
+
+//Register user
+module.exports.addUser = (newUser, cb) => {
+  //Hashing the password
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(newUser.password, salt, (err, hash) => {
+      if (err) throw err;
+      newUser.password = hash;
+      //Save the new user
+      newUser.save(cb);
+    });
+  });
+};
+
+//Compare the given password and given password
+module.exports.comparePassword = function(typedPassword, hash, cb) {
+  bcrypt.compare(typedPassword, hash, (err, isMatched) => {
+    if (err) {
+      throw err;
+    }
+    return cb(null, isMatched);
+  });
+};

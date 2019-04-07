@@ -57,24 +57,8 @@ app.use(passport.initialize());
 //THis should always be declraed after express session
 app.use(passport.session());
 
-// passport.use(new LocalStrategy(User.authenticate()));
-passport.use(
-  new LocalStrategy((username, password, done) => {
-    User.findOne({ username })
-      .then(user => {
-        if (!user) {
-          return done(null, false, { msg: "Incorrect Username" });
-        } else {
-          if (!user.password === password) {
-            return done(null, false, { message: "Incorrect password." });
-          }
+require("./config/passport")(passport); //Require passport-jwt payload token
 
-          return done(null, user);
-        }
-      })
-      .catch(err => done(err));
-  })
-);
 //Prevent back button after logout
 app.use((req, res, next) => {
   res.append("Access-Control-Allow-Origin", ["*"]);

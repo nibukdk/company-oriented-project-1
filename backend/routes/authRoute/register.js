@@ -24,46 +24,35 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const { isValid, errors } = validateRegisterInput(req.body);
   if (isValid) {
-    User.findOne({ email: req.body.email })
-      .then(user => {
+    User.findOne({ email: req.body.email }).then(user => {
+      if (user) {
+        return res.status(400).json({ error: "Email already exists" });
+      }
+      User.findOne({ username: req.body.username }).then(user => {
         if (user) {
-          errors.email = "Email already exists";
-          return res.status(400).json({ msg: errors.email });
-        } else {
-          User.findOne({ username: req.body.username })
-            .then(user => {
-              if (user) {
-                errors.username = "Username already exists";
-                return res.status(400).json({ msg: errors.username });
-              } else {
-                console.log(req.body);
-                const password = req.body.password;
-                const newUser = new User({
-                  name: req.body.name,
-                  username: req.body.username,
-                  email: req.body.email,
-                  registered_date: Date.now()
-                });
-                //Register new User
-                User.register(newUser, password, (err, newUser) => {
-                  if (err) {
-                    return res.status(400).json(err);
-                  }
-                  console.log(req.user);
-                  return res
-                    .status(200)
-                    .json({ success: "User Is Registered" });
-                });
-              }
-            })
-            .catch(err => {
-              res.status(400).json(err);
-            });
+          return res.status(400).json({ error: "Username already exists" });
         }
-      })
-      .catch(err => {
-        res.status(400).json(err);
+        const password = req.body.password;
+        //New User Object
+        const newUser = new User({
+          name: req.body.name,
+          username: req.body.username,
+          email: req.body.email,
+          name: req.body.name,
+          password: password,
+          registered_date: Date.now()
+        });
+        //Fetch AddUser method from user.js  in models
+        User.addUser(newUser, (err, usr) => {
+          if (err) {
+            return res.status(400).json({
+              err
+            });
+          }
+          return res.status(200).json(usr);
+        });
       });
+    });
   } else {
     res.status(200).json(errors);
   }
