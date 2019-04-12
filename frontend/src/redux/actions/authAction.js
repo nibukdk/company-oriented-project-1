@@ -1,5 +1,5 @@
 import { React, Component } from "react";
-import {  GET_ERRORS ,SET_CURRENT_USER} from "./types";
+import { GET_ERRORS, SET_CURRENT_USER } from "./types";
 import axios from "axios";
 import setAuthToken from "../../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
@@ -29,12 +29,21 @@ export const login_user = userData => dispatch => {
       setAuthToken(token);
       //Decode token to get user data
       const decoded = jwt_decode(token);
-      console.log(decoded);
 
       //Set Current User
       dispatch(setCurrentUser(decoded));
     })
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+//Logout user
+export const logout_user = () => dispatch => {
+  //Remove data from 'local storage'
+  localStorage.removeItem("JwtToekn");
+  //Remove auth header for future login
+  setAuthToken(false);
+  //Set current user to empty obj, and isAuthenticated to false
+  dispatch(setCurrentUser({}));
+  // this.props.history.push('/')
 };
 
 //Set logged in user

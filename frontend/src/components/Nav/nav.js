@@ -1,46 +1,86 @@
-import React from "react";
-// import WithClass from "../../HOC/ReactAux";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-// import Form from "react-bootstrap/Form";
-// import Button from "react-bootstrap/Button";
-// import FormControl from "react-bootstrap/FormControl";
+import { Link } from "react-router-dom";
 
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { logout_user } from "../../redux/actions/authAction";
 import Classes from "./nav.css";
-// import WithClass from "../../HOC/ReactAux";
-const nav = props => {
-  return (
-    
-    <Navbar bg="dark" variant="dark" expand="lg" fixed="top" className={Classes.Navbar}>
-      <Navbar.Brand>
-        <Link className="nav-link" to="/">
-          Home
-        </Link>
-      </Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
+class Navigation extends Component {
+  state = {};
+  onLogoutClickHandler = e => {
+    e.preventDefault();
+    this.props.logout_user();
+   
+  };
+  render() {
+    let navLinks = null;
+    if (this.props.auth.isAuthenticated) {
+      navLinks = (
         <Nav className="mr-auto">
-          <Link className="nav-link" to="/">
-            Home <span className="sr-only">(current)</span>
-          </Link>
+          <Nav.Item>
+            <Link className="nav-link" to="/">
+              Home <span className="sr-only">(current)</span>
+            </Link>
+          </Nav.Item>
 
-          <Link className="nav-link" to="/login">
-            Login
-          </Link>
-
-          <Link className="nav-link" to="/register">
-            Register
-          </Link>
+          <Nav.Item>
+            <Nav.Link
+              className="nav-link"
+              onClick={e => this.onLogoutClickHandler(e)}
+            >
+              Logout
+            </Nav.Link>
+          </Nav.Item>
         </Nav>
-        {/* <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-success">Search</Button>
-        </Form> */}
-      </Navbar.Collapse>
-    </Navbar>
-  );
+      );
+    } else {
+      navLinks = (
+        <Nav className="mr-auto">
+          <Nav.Item>
+            <Link className="nav-link" to="/">
+              Home <span className="sr-only">(current)</span>
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link className="nav-link" to="/login">
+              Login
+            </Link>
+          </Nav.Item>
+        </Nav>
+      );
+    }
+    return (
+      <Navbar
+        bg="dark"
+        variant="dark"
+        expand="lg"
+        fixed="top"
+        className={Classes.Navbar}
+      >
+        <Navbar.Brand>
+          <Link className="nav-link" to="/">
+            Home
+          </Link>
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">{navLinks}</Navbar.Collapse>
+      </Navbar>
+    );
+  }
+}
+Navigation.propTypes = {
+  logout_user: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
 };
 
-export default nav;
-
+export default connect(
+  mapStateToProps,
+  { logout_user }
+)(Navigation);

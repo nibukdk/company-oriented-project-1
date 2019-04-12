@@ -32,6 +32,13 @@ class Login extends Component {
     },
     errors: {}
   };
+  // //Prevent to go to login if already logged in
+  // componentDidMount(){
+  //   if(this.props.auth.isAuthenticated){
+  //     this.props.history.push('/')
+  //   }
+  // }
+
   componentWillReceiveProps(nextProps) {
     //Check if user is logged in and if so redirect to homepage
     if (nextProps.auth.isAuthenticated) {

@@ -63,6 +63,16 @@ class Register extends Component {
     },
     errors: {}
   };
+
+  // //Prevent to go to login if already logged in
+  // componentDidMount(){
+  //   if(this.props.auth.isAuthenticated){
+  //     this.props.history.push('/')
+  //   }
+  // }
+
+
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });

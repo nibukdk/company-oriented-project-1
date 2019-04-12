@@ -9,7 +9,7 @@ import { Provider } from "react-redux";
 
 import setAuthToken from "./utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { setCurrentUser } from "./redux/actions/authAction";
+import { setCurrentUser, logout_user } from "./redux/actions/authAction";
 
 //Check if token exists
 
@@ -20,6 +20,16 @@ if (localStorage.JwtToken) {
   const decoded = jwt_decode(localStorage.JwtToken);
   //Set user and isauthenticated
   store.dispatch(setCurrentUser(decoded));
+  const currentTime = Date.now() / 1000;
+
+  // if (currentTime > decoded.exp) {
+  //   //Logout user
+  //   store.dispatch(logout_user());
+  //   //TODO: Celar current profile
+
+  //   //Reidrect to login
+  //   window.location.href="/login"
+  // }
 }
 
 //App state store from redux and pass reducer
