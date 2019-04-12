@@ -87,9 +87,9 @@ const input = props => {
       inputElement = (
         <Form.Group controlId="formBasicTextarea">
           <Form.Label> {props.placeholder} </Form.Label>
-          <Form.Control name={props.elName} onChange={props.changed} rows="3" />
+          <Form.Control name={props.elName} onChange={props.changed} rows="3" placeholder={props.placeholder} value={props.elValue} />
           <Form.Text className="text-danger">
-            {formErorrObject[props.elName]}{" "}
+            {formErorrObject[props.elName]}
           </Form.Text>
           
         </Form.Group>

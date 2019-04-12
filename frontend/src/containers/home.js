@@ -9,7 +9,7 @@ import Register from "../components/auth/Register/register";
 import MovieWatch from "../components/MovieWatch/movieWatch";
 import { Container, Row, Col } from "react-bootstrap";
 
-
+import AddMovie from "../components/Movie/AddMovie/addMovie";
 class Home extends Component {
   render() {
     return (
@@ -23,6 +23,7 @@ class Home extends Component {
             <Route path="/watch-movie/:id" exact component={MovieWatch} />
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
+            <Route path="/new-movie" exact component={AddMovie} />
           </Col>
           <Col lg={12}>
             <Footers />

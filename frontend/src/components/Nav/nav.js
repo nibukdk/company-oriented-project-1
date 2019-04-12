@@ -12,7 +12,6 @@ class Navigation extends Component {
   onLogoutClickHandler = e => {
     e.preventDefault();
     this.props.logout_user();
-   
   };
   render() {
     let navLinks = null;
@@ -22,6 +21,11 @@ class Navigation extends Component {
           <Nav.Item>
             <Link className="nav-link" to="/">
               Home <span className="sr-only">(current)</span>
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link className="nav-link" to="/new-movie">
+              New Movie
             </Link>
           </Nav.Item>
 

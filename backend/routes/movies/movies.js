@@ -5,10 +5,7 @@ const validateMovieInput = require("../../validation/movie");
 
 const Movie = require("../../models/movie");
 
-//See All Movies
-router.get("/", (req, res) => {
-  res.send("Connected to movies");
-});
+
 
 //Upload New Movies
 router.post("/new-movie", (req, res) => {
