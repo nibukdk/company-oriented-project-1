@@ -1,4 +1,5 @@
-import { REGISTER_USER } from "../actions/types";
+import { REGISTER_USER, SET_CURRENT_USER } from "../actions/types";
+import isEmpty from "../../validation/isEmpty";
 
 const initState = {
   isAuthenticated: false,
@@ -6,10 +7,11 @@ const initState = {
 };
 const authReducer = (state = initState, action) => {
   switch (action.type) {
-    case REGISTER_USER:
+    case SET_CURRENT_USER:
       return {
         ...state,
-        user:action.payload
+        isAuthenticated: !isEmpty(action.payload),
+        user: action.payload
       };
 
     default:

@@ -1,19 +1,47 @@
 import { React, Component } from "react";
-import { REGISTER_USER, GET_ERRORS } from "./types";
+import {  GET_ERRORS ,SET_CURRENT_USER} from "./types";
 import axios from "axios";
+import setAuthToken from "../../utils/setAuthToken";
+import jwt_decode from "jwt-decode";
 //Register user
-export const register_user = newUser => dispatch => {
-  // return {
-  //   type: REGISTER_USER,
-  //   payload: userData
-  // };
+export const register_user = (newUser, history) => dispatch => {
   axios
     .post("/register", newUser)
-    .then(
-      res => <div>{this.props.history.push("/")}</div> //Redirect to home page after successful registration
-      // console.log(res.data)
-    )
+    .then(res => {
+      history.push("/login");
+    })
     .catch(err => {
       dispatch({ type: GET_ERRORS, payload: err.response.data });
     });
+};
+
+//Login User
+
+export const login_user = userData => dispatch => {
+  axios
+    .post("/login", userData)
+    .then(res => {
+      //Extract and save token to local storage
+      const { token } = res.data;
+      //Set to localstorage
+      localStorage.setItem("JwtToken", token);
+      //Set token to Auth header as required by jwt strategy
+      setAuthToken(token);
+      //Decode token to get user data
+      const decoded = jwt_decode(token);
+      console.log(decoded);
+
+      //Set Current User
+      dispatch(setCurrentUser(decoded));
+    })
+    .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
+};
+
+//Set logged in user
+
+export const setCurrentUser = decoded => {
+  return {
+    type: SET_CURRENT_USER,
+    payload: decoded
+  };
 };

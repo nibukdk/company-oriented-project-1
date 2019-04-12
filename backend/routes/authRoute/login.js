@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
         throw err;
       }
       if (!user) {
-        return res.json({ success: "false", error: "Username not found" });
+        return res.status(400).json({ username: "Username not found" });
       }
       //if found compareUser to regiestred one
       User.comparePassword(
@@ -28,7 +28,6 @@ router.post("/", (req, res) => {
               expiresIn: 3600 /*auto Logout in 1 hour*/
             });
             return res.status(200).json({
-              success: "true",
               token: "JWT " + token,
               user: user._id,
               email: user.email,
@@ -36,14 +35,12 @@ router.post("/", (req, res) => {
               user_role: user.user_role
             });
           }
-          return res
-            .status(400)
-            .json({ success: "false", error: " Password not Matched" });
+          return res.status(400).json({ password: " Password not Matched" });
         }
       );
     });
   } else {
-    return res.status(400).json({ success: "false", errors });
+    return res.status(400).json( errors );
   }
 });
 

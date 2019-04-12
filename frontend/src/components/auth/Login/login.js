@@ -3,12 +3,10 @@ import Input from "../../../UI/Input/input";
 import Classes from "./login.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Alert from "react-bootstrap/Alert";
-import { Row, Col } from "react-bootstrap";
-
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import axios from "axios";
+import { login_user } from "../../../redux/actions/authAction";
 class Login extends Component {
   state = {
     userInfo: {
@@ -16,8 +14,8 @@ class Login extends Component {
         attrs: {
           elType: "text",
           elName: "username",
-          divClass: "form-group",
-          className: "form-control"
+          className: "form-control",
+          placeholder: "Username"
         },
         value: ""
       },
@@ -26,14 +24,24 @@ class Login extends Component {
         attrs: {
           elType: "password",
           elName: "password1",
-          divClass: "form-group",
-          className: "form-control"
+          className: "form-control",
+          placeholder: "Password"
         },
         value: ""
       }
-    }
+    },
+    errors: {}
   };
-
+  componentWillReceiveProps(nextProps) {
+    //Check if user is logged in and if so redirect to homepage
+    if (nextProps.auth.isAuthenticated) {
+      this.props.history.push("/");
+    }
+    //Check if theres error, if so set errors
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
   inputChangeHandler = (e, id) => {
     const newUserInfo = { ...this.state.userInfo };
     const element = { ...newUserInfo[id] };
@@ -43,19 +51,15 @@ class Login extends Component {
   };
   onLoginSubmitHandler = e => {
     e.preventDefault();
-
+    const { errors } = this.state;
     const newUser = {
       username: this.state.userInfo.username.value,
       password: this.state.userInfo.password.value
     };
+    //Call login_user action
+    this.props.login_user(newUser);
 
-    axios
-      .post("/login", newUser)
-      .then(res =>
-        // <div>{this.props.history.push("/")}</div> //Redirect to home page after successful registration
-        console.log({ response: res })
-      )
-      .catch(err => console.log({ Error: err }));
+    
   };
 
   render() {
@@ -77,10 +81,11 @@ class Login extends Component {
             key={elem.id}
             elType={elem.setup.attrs.elType}
             elName={elem.id}
-            divClass="form-group"
-            className="form-control"
+            className={elem.className}
             elValue={elem.setup.value}
+            placeholder={elem.setup.attrs.placeholder}
             changed={e => this.inputChangeHandler(e, elem.id)}
+            errors={this.state.errors}
           />
         ))}
         <Button variant="primary" type="submit">
@@ -90,5 +95,18 @@ class Login extends Component {
     );
   }
 }
-
-export default Login;
+Login.propTypes = {
+  login_user: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    errors: state.errors
+  };
+};
+export default connect(
+  mapStateToProps,
+  { login_user }
+)(Login);

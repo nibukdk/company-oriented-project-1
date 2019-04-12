@@ -1,10 +1,7 @@
 import React from "react";
-// import WithClass from "../../../HOC/ReactAux";
 import Classes from "./movieItem.css";
 import Card from "react-bootstrap/Card";
 import Col from "react-bootstrap/Col";
-import { Route } from "react-router-dom";
-import MovieWatch from "../../MovieWatch/movieWatch";
 import { Link } from "react-router-dom";
 
 const movieItem = props => {

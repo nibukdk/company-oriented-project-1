@@ -23,7 +23,6 @@ const input = props => {
             onChange={props.changed}
             className={props.className}
           />
-             {console.log(formErorrObject)}
           <Form.Text className="text-danger">{formErorrObject[props.elName]}</Form.Text>
         </Form.Group>
      
