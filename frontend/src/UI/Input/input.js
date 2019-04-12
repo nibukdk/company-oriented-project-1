@@ -2,72 +2,97 @@ import React from "react";
 import Form from "react-bootstrap/Form";
 
 const input = props => {
-  let inputElement = null,
-    nameOfInpType =
-      props.elName.charAt(0).toUpperCase() + props.elName.slice(1);
+  let inputElement = null;
+  let formErorrObject = {};
+  if (props.errors) {
+    formErorrObject = { ...props.errors };
+  }
+
+  //   props.placeholder =
+  //     props.elName.charAt(0).toUpperCase() + props.elName.slice(1);
   switch (props.elType) {
     case "text":
       inputElement = (
         <Form.Group controlId="formBasicText">
-          <Form.Label>{nameOfInpType}</Form.Label>
+          <Form.Label>{props.placeholder}</Form.Label>
           <Form.Control
             type="text"
-            placeholder={nameOfInpType}
+            placeholder={props.placeholder}
             name={props.elName}
             value={props.elValue}
             onChange={props.changed}
+            className={props.className}
           />
+             {console.log(formErorrObject)}
+          <Form.Text className="text-danger">{formErorrObject[props.elName]}</Form.Text>
         </Form.Group>
+     
       );
       break;
 
     case "password":
       inputElement = (
         <Form.Group controlId="formBasicPassword">
-          <Form.Label> {nameOfInpType} </Form.Label>
+          <Form.Label> {props.placeholder} </Form.Label>
           <Form.Control
             type="password"
-            placeholder={nameOfInpType}
+            placeholder={props.placeholder}
             name={props.elName}
             value={props.elValue}
             onChange={props.changed}
           />
+          <Form.Text className="text-danger">
+            {formErorrObject[props.elName]}
+          </Form.Text>
+          
         </Form.Group>
       );
       break;
     case "email":
       inputElement = (
         <Form.Group controlId="formBasicEmail">
-          <Form.Label> {nameOfInpType} </Form.Label>
+          <Form.Label> {props.placeholder} </Form.Label>
           <Form.Control
             type="email"
-            placeholder={nameOfInpType}
+            placeholder={props.placeholder}
             name={props.elName}
             value={props.elValue}
             onChange={props.changed}
           />
+          <Form.Text className="text-danger">
+            {formErorrObject[props.elName]}
+          </Form.Text>
+          
         </Form.Group>
       );
       break;
     case "checkbox":
       inputElement = (
         <Form.Group controlId="formBasicCheckbox">
-          <Form.Label> {nameOfInpType} </Form.Label>
+          <Form.Label> {props.placeholder} </Form.Label>
           <Form.Control
             type="checkbox"
-            placeholder={nameOfInpType}
+            placeholder={props.placeholder}
             name={props.elName}
             value={props.elValue}
             onChange={props.changed}
           />
+          <Form.Text className="text-danger">
+            {formErorrObject[props.elName]}{" "}
+          </Form.Text>
+          
         </Form.Group>
       );
       break;
     case "textarea":
       inputElement = (
         <Form.Group controlId="formBasicTextarea">
-          <Form.Label> {nameOfInpType} </Form.Label>
+          <Form.Label> {props.placeholder} </Form.Label>
           <Form.Control name={props.elName} onChange={props.changed} rows="3" />
+          <Form.Text className="text-danger">
+            {formErorrObject[props.elName]}{" "}
+          </Form.Text>
+          
         </Form.Group>
       );
       break;
