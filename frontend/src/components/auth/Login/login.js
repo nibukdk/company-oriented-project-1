@@ -6,6 +6,8 @@ import Button from "react-bootstrap/Button";
 import Alert from "react-bootstrap/Alert";
 import { Row, Col } from "react-bootstrap";
 
+import { connect } from "react-redux";
+
 import axios from "axios";
 class Login extends Component {
   state = {

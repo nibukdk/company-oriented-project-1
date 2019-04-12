@@ -48,7 +48,6 @@ class Movie extends Component {
     return (
       <Container>
         <Row>{movieItem}
-          {console.log(this.state.movies)}
         </Row>
       </Container>
     );

@@ -3,8 +3,13 @@ import Input from "../../../UI/Input/input";
 import Classes from "./register.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Alert from "react-bootstrap/Alert";
-import { Row, Col } from "react-bootstrap";
+import PropTypes from "prop-types";
+
+// import Alert from "react-bootstrap/Alert";
+// import { Row, Col } from "react-bootstrap";
+
+import { connect } from "react-redux";
+import { register_user } from "../../../redux/actions/authAction";
 
 import axios from "axios";
 class Register extends Component {
@@ -14,8 +19,8 @@ class Register extends Component {
         attrs: {
           elType: "text",
           elName: "name",
-          divClass: "form-group",
-          className: "form-control"
+          className: "form-control",
+          placeholder: "Full Name"
         },
         value: ""
       },
@@ -23,8 +28,8 @@ class Register extends Component {
         attrs: {
           elType: "text",
           elName: "username",
-          divClass: "form-group",
-          className: "form-control"
+          className: "form-control",
+          placeholder: "Username"
         },
         value: ""
       },
@@ -32,8 +37,8 @@ class Register extends Component {
         attrs: {
           elType: "text",
           elName: "email",
-          divClass: "form-group",
-          className: "form-control"
+          className: "form-control",
+          placeholder: "Email"
         },
         value: ""
       },
@@ -41,8 +46,8 @@ class Register extends Component {
         attrs: {
           elType: "password",
           elName: "password1",
-          divClass: "form-group",
-          className: "form-control"
+          className: "form-control",
+          placeholder: "Password"
         },
         value: ""
       },
@@ -50,14 +55,19 @@ class Register extends Component {
         attrs: {
           elType: "password",
           elName: "password2",
-          divClass: "form-group",
-          className: "form-control"
+          className: "form-control invalid",
+          placeholder: "Confirm Password"
         },
         value: ""
       }
-    }
+    },
+    errors: {}
   };
-
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
   inputChangeHandler = (e, id) => {
     const newUserInfo = { ...this.state.userInfo };
     const element = { ...newUserInfo[id] };
@@ -67,11 +77,6 @@ class Register extends Component {
   };
   onRegisterSubmitHandler = e => {
     e.preventDefault();
-    let pass1 = this.state.userInfo.password1.value,
-      pass2 = this.state.userInfo.password2.value;
-
-    // if (pass1 !== pass2) {
-    // }
     const newUser = {
       name: this.state.userInfo.name.value,
       username: this.state.userInfo.username.value,
@@ -79,12 +84,7 @@ class Register extends Component {
       password2: this.state.userInfo.password2.value,
       email: this.state.userInfo.email.value
     };
-    axios
-      .post("/register", newUser)
-      .then(res => (
-        <div>{this.props.history.push("/")}</div> //Redirect to home page after successful registration
-      ))
-      .catch(err => console.log(<Alert variant="danger">{err}</Alert>));
+    this.props.register_user(newUser);
   };
 
   render() {
@@ -106,10 +106,11 @@ class Register extends Component {
             key={elem.id}
             elType={elem.setup.attrs.elType}
             elName={elem.id}
-            divClass="form-group"
-            className="form-control"
+            className={elem.className}
             elValue={elem.setup.value}
+            placeholder={elem.setup.attrs.placeholder}
             changed={e => this.inputChangeHandler(e, elem.id)}
+            errors={this.state.errors}
           />
         ))}
         <Button variant="primary" type="submit">
@@ -120,4 +121,20 @@ class Register extends Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+  register_user: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+    errors: state.errors
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { register_user }
+)(Register);
