@@ -32,7 +32,8 @@ router.post("/", (req, res) => {
               token: "JWT " + token,
               user: user._id,
               email: user.email,
-              username: user.username
+              username: user.username,
+              user_role: user.user_role
             });
           }
           return res
