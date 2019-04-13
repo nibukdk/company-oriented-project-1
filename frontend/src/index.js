@@ -22,14 +22,14 @@ if (localStorage.JwtToken) {
   store.dispatch(setCurrentUser(decoded));
   const currentTime = Date.now() / 1000;
 
-  // if (currentTime > decoded.exp) {
-  //   //Logout user
-  //   store.dispatch(logout_user());
-  //   //TODO: Celar current profile
+  if (currentTime > decoded.exp) {
+    //Logout user
+    store.dispatch(logout_user());
+    //TODO: Celar current profile
 
-  //   //Reidrect to login
-  //   window.location.href="/login"
-  // }
+    //Reidrect to login
+    window.location.href="/login"
+  }
 }
 
 //App state store from redux and pass reducer
