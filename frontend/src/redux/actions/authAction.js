@@ -35,16 +35,6 @@ export const login_user = userData => dispatch => {
     })
     .catch(err => dispatch({ type: GET_ERRORS, payload: err.response.data }));
 };
-//Logout user
-export const logout_user = () => dispatch => {
-  //Remove data from 'local storage'
-  localStorage.removeItem("JwtToekn");
-  //Remove auth header for future login
-  setAuthToken(false);
-  //Set current user to empty obj, and isAuthenticated to false
-  dispatch(setCurrentUser({}));
-  // this.props.history.push('/')
-};
 
 //Set logged in user
 
@@ -53,4 +43,15 @@ export const setCurrentUser = decoded => {
     type: SET_CURRENT_USER,
     payload: decoded
   };
+};
+
+//Logout user
+export const logout_user = () => dispatch => {
+  //Remove data from 'local storage'
+  localStorage.removeItem("JwtToken");
+  //Remove auth header for future login
+  setAuthToken(false);
+  //Set current user to empty obj, and isAuthenticated to false
+  dispatch(setCurrentUser({}));
+  // this.props.history.push('/')
 };
