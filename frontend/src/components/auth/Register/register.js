@@ -11,7 +11,6 @@ import {withRouter} from "react-router-dom";
 import { connect } from "react-redux";
 import { register_user } from "../../../redux/actions/authAction";
 
-import axios from "axios";
 class Register extends Component {
   state = {
     userInfo: {
@@ -64,12 +63,12 @@ class Register extends Component {
     errors: {}
   };
 
-  //Prevent to go to login if already logged in
-  componentDidMount(){
-    if(this.props.auth.isAuthenticated){
-      this.props.history.push('/')
-    }
-  }
+  // //Prevent to go to login if already logged in
+  // componentDidMount(){
+  //   if(this.props.auth.isAuthenticated){
+  //     this.props.history.push('/')
+  //   }
+  // }
 
 
 

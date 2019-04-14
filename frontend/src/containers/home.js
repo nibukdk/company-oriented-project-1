@@ -23,7 +23,7 @@ class Home extends Component {
             <Route path="/watch-movie/:id" exact component={MovieWatch} />
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
-            <Route path="/new-movie" exact component={AddMovie} />
+            <Route path="/movies/new-movie" exact component={AddMovie} />
           </Col>
           <Col lg={12}>
             <Footers />

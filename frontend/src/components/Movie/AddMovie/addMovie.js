@@ -4,6 +4,10 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Classes from "./addMovie.css";
 import axios from "axios";
+import { connect } from "react-redux";
+import Movie from "../movie";
+import PropTypes from "prop-types";
+
 class AddMovie extends Component {
   state = {
     movie: {
@@ -54,7 +58,7 @@ class AddMovie extends Component {
       },
       released_date: {
         attrs: {
-          elType: "text",
+          elType: "date",
           elName: "released_date",
           className: "form-control",
           placeholder: "Released date of Movie"
@@ -62,7 +66,8 @@ class AddMovie extends Component {
         value: ""
       }
     },
-    errors: {}
+    errors: {},
+    currentUser: null
   };
 
   //On Input Change
@@ -73,27 +78,33 @@ class AddMovie extends Component {
     newMovieInfo[id] = element;
     this.setState({ movie: newMovieInfo });
   };
+
   //On form submit
   onMovieSubmitHadler = e => {
     e.preventDefault();
+    const newState = { ...this.state };
+    newState.currentUser = this.props.auth.user._id;
+    this.setState(newState);
     const newMovie = {
       title: this.state.movie.title.value,
       genre: this.state.movie.genre.value,
       description: this.state.movie.description.value,
       source_id: this.state.movie.source_id.value,
       image_url: this.state.movie.image_url.value,
-      released_date: this.state.movie.released_date.value
+      released_date: this.state.movie.released_date.value,
+      uploaded_by: this.props.auth.user._id
     };
+
     axios
       .post("/movies/new-movie", newMovie)
-      .then(res => console.log(res.data))
+      .then(res => this.props.history.push('/'))
       .catch(err => {
-        //if error send error message to form 
-        let errors = { ...this.state.errors };
-        errors = err.response.data;
-        this.setState({ errors: errors });
+        //if error send error message to form
+        const newState = { ...this.state };
+        newState.errors = err.response.data;
+
+        this.setState(newState);
       });
-    console.log(newMovie);
   };
 
   render() {
@@ -120,6 +131,7 @@ class AddMovie extends Component {
             errors={this.state.errors}
           />
         ))}
+
         <Button variant="primary" type="submit">
           Upload
         </Button>
@@ -127,5 +139,15 @@ class AddMovie extends Component {
     );
   }
 }
-
-export default AddMovie;
+// Movie.propTypes = {
+//   auth: PropTypes.object.isRequired
+// };
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+export default connect(
+  mapStateToProps,
+  {}
+)(AddMovie);

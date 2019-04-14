@@ -24,7 +24,7 @@ class Navigation extends Component {
             </Link>
           </Nav.Item>
           <Nav.Item>
-            <Link className="nav-link" to="/new-movie">
+            <Link className="nav-link" to="/movies/new-movie">
               New Movie
             </Link>
           </Nav.Item>
@@ -50,6 +50,11 @@ class Navigation extends Component {
           <Nav.Item>
             <Link className="nav-link" to="/login">
               Login
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link className="nav-link" to="/register">
+              Register
             </Link>
           </Nav.Item>
         </Nav>

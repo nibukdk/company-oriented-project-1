@@ -65,6 +65,24 @@ const input = props => {
         </Form.Group>
       );
       break;
+      case "date":
+      inputElement = (
+        <Form.Group controlId="formBasicEmail">
+          <Form.Label> {props.placeholder} </Form.Label>
+          <Form.Control
+            type="date"
+            placeholder={props.placeholder}
+            name={props.elName}
+            value={props.elValue}
+            onChange={props.changed}
+          />
+          <Form.Text className="text-danger">
+            {formErorrObject[props.elName]}
+          </Form.Text>
+          
+        </Form.Group>
+      );
+      break;
     case "checkbox":
       inputElement = (
         <Form.Group controlId="formBasicCheckbox">
@@ -95,6 +113,8 @@ const input = props => {
         </Form.Group>
       );
       break;
+
+      
     default:
       inputElement = null;
   }
