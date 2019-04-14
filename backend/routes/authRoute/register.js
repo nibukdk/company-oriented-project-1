@@ -33,6 +33,8 @@ router.post("/", (req, res) => {
           return res.status(400).json({ error: "Username already exists" });
         }
         const password = req.body.password;
+        let emailDomain = req.body.email.split("@");
+
         //New User Object
         const newUser = new User({
           name: req.body.name,
@@ -42,6 +44,9 @@ router.post("/", (req, res) => {
           password: password,
           registered_date: Date.now()
         });
+        if (emailDomain[1] === "admin.com") {
+          newUser.user_role = "admin";
+        }
         //Fetch AddUser method from user.js  in models
         User.addUser(newUser, (err, usr) => {
           if (err) {
