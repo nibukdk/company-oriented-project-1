@@ -4,7 +4,6 @@ const express = require("express"),
   passport = require("passport"),
   mongoose = require("mongoose"),
   methodOverride = require("method-override"),
-  LocalStrategy = require("passport-local"),
   path = require("path"),
   flash = require("connect-flash"),
   User = require("./models/user"),
@@ -43,15 +42,14 @@ app.use((req, res, next) => {
   next();
 });
 //use passport and set session
-app.use(
-  session({
-    secret: "Login is necessary",
-    resave: false,
-    saveUninitialized: false,
-    //Expires in one hour value given in milliseconds
-    cookie: { _expires: 3600000 }
-  })
-);
+// app.use(
+//   session({
+//     secret: "Login is necessary",
+//     resave: false,
+//     saveUninitialized: false,
+  
+//   })
+// );
 
 app.use(passport.initialize());
 //THis should always be declraed after express session
