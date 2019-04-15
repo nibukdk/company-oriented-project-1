@@ -12,6 +12,7 @@ class Navigation extends Component {
   onLogoutClickHandler = e => {
     e.preventDefault();
     this.props.logout_user();
+    window.location.href = "/";
   };
   render() {
     let navLinks = null;

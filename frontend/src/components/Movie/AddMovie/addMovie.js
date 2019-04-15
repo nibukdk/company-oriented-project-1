@@ -70,6 +70,14 @@ class AddMovie extends Component {
     currentUser: null
   };
 
+  
+  //Prevent to go to movieAdd if user is not admin
+  componentDidMount(){
+    if(!this.props.auth.isAuthenticated || this.props.auth.user.user_role != 'admin'){
+      this.props.history.push('/')
+    }
+  }
+
   //On Input Change
   inputChangeHandler = (e, id) => {
     const newMovieInfo = { ...this.state.movie };
