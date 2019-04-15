@@ -10,7 +10,7 @@ const express = require("express"),
 const Movie = require("./models/movie");
 
 //Set port for local server
-const PORT = 8080 || process.env.PORT;
+const PORT = process.env.PORT || 8080;
 
 //Import Routes
 const adminRoutes = require("./routes/admin/admin"),
