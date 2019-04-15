@@ -17,17 +17,17 @@ class Navigation extends Component {
   render() {
     let adminNewMovieLink = null;
     let navLinks = null;
-    {
-      if (this.props.auth.user.user_role === "admin") {
-        adminNewMovieLink = (
-          <Nav.Item>
-            <Link className="nav-link" to="/movies/new-movie">
-              New Movie
-            </Link>
-          </Nav.Item>
-        );
-      }
+
+    if (this.props.auth.user.user_role === "admin") {
+      adminNewMovieLink = (
+        <Nav.Item>
+          <Link className="nav-link" to="/movies/new-movie">
+            New Movie
+          </Link>
+        </Nav.Item>
+      );
     }
+
     if (this.props.auth.isAuthenticated) {
       navLinks = (
         <Nav className="mr-auto">

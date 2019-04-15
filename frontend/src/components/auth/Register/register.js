@@ -4,7 +4,7 @@ import Classes from "./register.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import PropTypes from "prop-types";
-import {withRouter} from "react-router-dom";
+// import {withRouter} from "react-router-dom";
 // import Alert from "react-bootstrap/Alert";
 // import { Row, Col } from "react-bootstrap";
 

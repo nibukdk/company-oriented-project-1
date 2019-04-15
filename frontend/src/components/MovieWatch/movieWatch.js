@@ -20,6 +20,7 @@ class movieWatch extends Component {
                 src={
                   "https://www.youtube.com/embed/" + this.props.match.params.id
                 }
+                title={this.props.match.params.id}
               />
             </ResponsiveEmbed>
           </Col>

@@ -17,7 +17,6 @@ class TopPicks extends Component {
       newState.topMoviePicks = [...this.props.topPicks];
       newState.hasMovie = true;
       this.setState(newState);
-      console.log(this.state.topMoviePicks);
     }
   }
   render() {

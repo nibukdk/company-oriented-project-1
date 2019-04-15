@@ -5,8 +5,8 @@ import Button from "react-bootstrap/Button";
 import Classes from "./addMovie.css";
 import axios from "axios";
 import { connect } from "react-redux";
-import Movie from "../movie";
-import PropTypes from "prop-types";
+// import Movie from "../movie";
+// import PropTypes from "prop-types";
 
 class AddMovie extends Component {
   state = {
@@ -70,11 +70,13 @@ class AddMovie extends Component {
     currentUser: null
   };
 
-  
   //Prevent to go to movieAdd if user is not admin
-  componentDidMount(){
-    if(!this.props.auth.isAuthenticated || this.props.auth.user.user_role != 'admin'){
-      this.props.history.push('/')
+  componentDidMount() {
+    if (
+      !this.props.auth.isAuthenticated ||
+      this.props.auth.user.user_role !== "admin"
+    ) {
+      this.props.history.push("/");
     }
   }
 
@@ -105,7 +107,7 @@ class AddMovie extends Component {
 
     axios
       .post("/movies/new-movie", newMovie)
-      .then(res => this.props.history.push('/'))
+      .then(res => this.props.history.push("/"))
       .catch(err => {
         //if error send error message to form
         const newState = { ...this.state };

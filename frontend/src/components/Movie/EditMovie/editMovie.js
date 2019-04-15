@@ -69,12 +69,7 @@ class EditMovie extends Component {
     currentUser: null
     // flashAlert: null
   };
-//Prevent to go to movieedit if user is not admin
-componentDidMount(){
-  if(!this.props.auth.isAuthenticated ||(this.props.auth.isAuthenticated  && this.props.auth.user.user_role != 'admin')){
-    this.props.history.push('/')
-  }
-}
+
   //On Input Change
   inputChangeHandler = (e, id) => {
     const newMovieInfo = { ...this.state.movie };
@@ -85,6 +80,15 @@ componentDidMount(){
   };
 
   componentDidMount() {
+    //Prevent to go to movieedit if user is not admin
+
+    if (
+      !this.props.auth.isAuthenticated ||
+      (this.props.auth.isAuthenticated &&
+        this.props.auth.user.user_role !== "admin")
+    ) {
+      this.props.history.push("/");
+    }
     const convert = str => {
       let initDate = str.slice(0, 10),
         date = initDate.split("-"),
