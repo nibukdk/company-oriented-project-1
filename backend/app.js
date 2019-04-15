@@ -31,8 +31,6 @@ app.set("view engine", "ejs");
 //Following setting for adding sub-directories to views folder, while rendering files for eg: <directory-name/filename>
 app.set("views", path.join(__dirname, "/views"));
 
-app.use(methodOverride("_method"));
-
 //Enable Use of Flash
 app.use(flash());
 //Enable Flash
