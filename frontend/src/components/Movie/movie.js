@@ -1,21 +1,21 @@
 import React, { Component } from "react";
 import MovieItem from "./MovieItem/movieItem";
-import WithClass from "../../HOC/ReactAux";
 
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 
-// import Classes from "./movie.css";
-
+import { connect } from "react-redux";
 class Movie extends Component {
   state = {
-    movies: this.props.movieList
+    movies: this.props.movieList,
+    user_role: this.props.auth.user.user_role
   };
 
   // onSourceIdClickedHandler = id => {
   //   console.log('Cli')
   // };
   render() {
+    const user_role = this.state.user_role;
     let movieItem = (
       <Container>
         <Row>
@@ -25,9 +25,11 @@ class Movie extends Component {
     );
     if (this.state.movies) {
       movieItem = this.state.movies.map(movie => {
+      
         return (
           <MovieItem
             key={movie._id}
+            objId= {movie._id}
             title={movie.title}
             desc={movie.description}
             genre={movie.genre}
@@ -39,7 +41,7 @@ class Movie extends Component {
             source_id={movie.source_id}
             uploaded_by={movie.uploaded_by}
             img={movie.image_url}
-            
+            user_role={user_role}
           />
         );
       });
@@ -47,11 +49,17 @@ class Movie extends Component {
 
     return (
       <Container>
-        <Row>{movieItem}
-        </Row>
+        <Row>{movieItem}</Row>
       </Container>
     );
   }
 }
-
-export default Movie;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+export default connect(
+  mapStateToProps,
+  {}
+)(Movie);

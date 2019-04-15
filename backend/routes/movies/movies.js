@@ -1,39 +1,57 @@
 const express = require("express"),
-  router = express.Router();
+  router = express.Router(),
+  passport = require("passport");
 
 const validateMovieInput = require("../../validation/movie");
 
 const Movie = require("../../models/movie");
 
-
-
-//Upload New Movies
-router.post("/new-movie", (req, res) => {
-  const { errors, isValid } = validateMovieInput(req.body);
-
-  if (isValid) {
-    const newMovie = {};
-    (newMovie.title = req.body.title),
-      (newMovie.genre = req.body.genre.split(",")),
-      (newMovie.description = req.body.description),
-      (newMovie.source_id = req.body.source_id),
-      (newMovie.image_url = req.body.image_url),
-      (newMovie.uploaded_date = Date.now()),
-      (newMovie.released_date = req.body.released_date);
-
-    Movie.create(newMovie)
-      .then(movie => {
-        res.status(200).json(movie);
-      })
-      .catch(err => res.status(400).json(err));
-  } else {
-    res.status(400).json(errors);
-  }
+// router.use((req, res, next) => {
+//   res.locals.user = req.user;
+//   next();
+// });
+router.get("/", (req, res) => {
+  res.status(200).send("Movie Page");
 });
+//Upload New Movies
+router.post(
+  "/new-movie",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateMovieInput(req.body);
+    console.log(req.body);
+    if (isValid) {
+      const newMovie = {};
+      (newMovie.title = req.body.title),
+        (newMovie.genre = req.body.genre.split(",")),
+        (newMovie.description = req.body.description),
+        (newMovie.source_id = req.body.source_id),
+        (newMovie.image_url = req.body.image_url),
+        (newMovie.uploaded_date = Date.now()),
+        (newMovie.released_date = req.body.released_date),
+        (newMovie.uploaded_by = req.body.uploaded_by);
+
+      Movie.create(newMovie)
+        .then(movie => {
+          res.status(200).json(movie);
+        })
+        .catch(err => res.status(400).json(err));
+    } else {
+      res.status(400).json(errors);
+    }
+  }
+);
 
 //Edit Movie
+router.get("/edit-movie/:id", (req, res) => {
+  Movie.findById(req.params.id)
+    .then(movie => {
+      res.status(200).json(movie);
+    })
+    .catch(err => res.status(400).json(err));
+});
 
-router.put("/edit/:id", (req, res) => {
+router.put("/edit-movie/:id", (req, res) => {
   const { errors, isValid } = validateMovieInput(req.body);
 
   if (isValid) {

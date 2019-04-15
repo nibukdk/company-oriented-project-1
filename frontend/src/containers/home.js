@@ -8,7 +8,7 @@ import Login from "../components/auth/Login/login";
 import Register from "../components/auth/Register/register";
 import MovieWatch from "../components/MovieWatch/movieWatch";
 import { Container, Row, Col } from "react-bootstrap";
-
+import EditMovie from "../components/Movie/EditMovie/editMovie";
 import AddMovie from "../components/Movie/AddMovie/addMovie";
 class Home extends Component {
   render() {
@@ -21,6 +21,7 @@ class Home extends Component {
           <Col lg={12} className={Classes.Main}>
             <Route path="/" exact component={Main} />
             <Route path="/watch-movie/:id" exact component={MovieWatch} />
+            <Route path="/movies/edit-movie/:id" exact component={EditMovie} />
             <Route path="/login" exact component={Login} />
             <Route path="/register" exact component={Register} />
             <Route path="/movies/new-movie" exact component={AddMovie} />
