@@ -2,8 +2,14 @@ import React, { Component } from "react";
 import { Row, Col, Container } from "react-bootstrap";
 import Classes from "./movieWatch.css";
 import ResponsiveEmbed from "react-bootstrap/ResponsiveEmbed";
-
+import { connect } from "react-redux";
 class movieWatch extends Component {
+  //Prevent to go to movieWatch If user is not logged in
+  componentDidMount() {
+    if (!this.props.auth.isAuthenticated) {
+      this.props.history.push("/login");
+    }
+  }
   render() {
     return (
       <Container className={Classes.Movie}>
@@ -17,11 +23,22 @@ class movieWatch extends Component {
               />
             </ResponsiveEmbed>
           </Col>
-          <Col lg={3}>hahflaz</Col>
+          <Col lg={3} className="text-info">
+            Recommmendation Column to Be Filled
+          </Col>
         </Row>
       </Container>
     );
   }
 }
 
-export default movieWatch;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  {}
+)(movieWatch);
