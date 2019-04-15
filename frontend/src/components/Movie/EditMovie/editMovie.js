@@ -67,8 +67,14 @@ class EditMovie extends Component {
     },
     errors: {},
     currentUser: null
+    // flashAlert: null
   };
-
+//Prevent to go to movieedit if user is not admin
+componentDidMount(){
+  if(!this.props.auth.isAuthenticated ||(this.props.auth.isAuthenticated  && this.props.auth.user.user_role != 'admin')){
+    this.props.history.push('/')
+  }
+}
   //On Input Change
   inputChangeHandler = (e, id) => {
     const newMovieInfo = { ...this.state.movie };
@@ -146,6 +152,21 @@ class EditMovie extends Component {
       });
   };
 
+  //Delete Movie
+  onMovieDeleteSelectHandler = (e, id) => {
+    e.preventDefault();
+    axios
+      .delete("/movies/delete/" + id)
+      .then(res => this.props.history.push("/"))
+      .catch(err => {
+        //if error send error message to form
+        const newState = { ...this.state };
+        newState.errors = err.response.data;
+
+        this.setState(newState);
+      });
+  };
+
   render() {
     //Define movie form array
     let movieUploadForm = [];
@@ -171,8 +192,19 @@ class EditMovie extends Component {
           />
         ))}
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" size="lg" block>
           Upload
+        </Button>
+        <Button
+          variant="danger"
+          type="submit"
+          onClick={e =>
+            this.onMovieDeleteSelectHandler(e, this.props.match.params.id)
+          }
+          size="lg"
+          block
+        >
+          Delete
         </Button>
       </Form>
     );
