@@ -30,13 +30,12 @@ Since, its a demo application until this date (15.04.2019), the application is n
 2.  User Authencation features
 3.  Movie Watch Page is Available to authenticated users only.
 
- <br>
- Some features for future developent: <br>
- 1. Recommendation system
- 2. User Profile
- 3. Admin-User privileges
- 4. User Comments, Movie likes and dislikes
+Some features for future developent: <br>
 
+1.  Recommendation system
+2.  User Profile
+3.  Admin-User privileges
+4.  User Comments, Movie likes and dislikes
 
 ## Heroku Link
 
