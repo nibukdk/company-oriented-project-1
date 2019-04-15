@@ -1,5 +1,4 @@
 const express = require("express"),
-  path = require("path"),
   bodyParser = require("body-parser"),
   passport = require("passport"),
   mongoose = require("mongoose"),
