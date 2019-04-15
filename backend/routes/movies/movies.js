@@ -14,33 +14,29 @@ router.get("/", (req, res) => {
   res.status(200).send("Movie Page");
 });
 //Upload New Movies
-router.post(
-  "/new-movie",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    const { errors, isValid } = validateMovieInput(req.body);
-    console.log(req.body);
-    if (isValid) {
-      const newMovie = {};
-      (newMovie.title = req.body.title),
-        (newMovie.genre = req.body.genre.split(",")),
-        (newMovie.description = req.body.description),
-        (newMovie.source_id = req.body.source_id),
-        (newMovie.image_url = req.body.image_url),
-        (newMovie.uploaded_date = Date.now()),
-        (newMovie.released_date = req.body.released_date),
-        (newMovie.uploaded_by = req.body.uploaded_by);
+router.post("/new-movie", (req, res) => {
+  const { errors, isValid } = validateMovieInput(req.body);
+  console.log(req.body);
+  if (isValid) {
+    const newMovie = {};
+    (newMovie.title = req.body.title),
+      (newMovie.genre = req.body.genre.split(",")),
+      (newMovie.description = req.body.description),
+      (newMovie.source_id = req.body.source_id),
+      (newMovie.image_url = req.body.image_url),
+      (newMovie.uploaded_date = Date.now()),
+      (newMovie.released_date = req.body.released_date),
+      (newMovie.uploaded_by = req.body.uploaded_by);
 
-      Movie.create(newMovie)
-        .then(movie => {
-          res.status(200).json(movie);
-        })
-        .catch(err => res.status(400).json(err));
-    } else {
-      res.status(400).json(errors);
-    }
+    Movie.create(newMovie)
+      .then(movie => {
+        res.status(200).json(movie);
+      })
+      .catch(err => res.status(400).json(err));
+  } else {
+    res.status(400).json(errors);
   }
-);
+});
 
 //Edit Movie
 router.get("/edit-movie/:id", (req, res) => {
