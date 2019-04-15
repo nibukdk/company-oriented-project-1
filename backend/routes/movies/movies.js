@@ -82,7 +82,7 @@ router.put("/edit-movie/:id", (req, res) => {
 });
 //Delete Moive
 router.delete("/delete/:id", (req, res) => {
-  Event.findByIdAndRemove(req.params.id)
+  Movie.findByIdAndRemove(req.params.id)
     .then(success => {
       if (success) {
         res.json(200).json({ msg: "Deleted" });
