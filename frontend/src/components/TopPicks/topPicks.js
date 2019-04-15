@@ -7,12 +7,22 @@ import ListGroup from "react-bootstrap/ListGroup";
 
 class TopPicks extends Component {
   state = {
-    topMoviePicks: this.props.topPicks
+    topMoviePicks: [],
+    hasMovie: false
   };
+  componentDidMount() {
+    const newState = { ...this.state };
 
+    if (this.props.topPicks) {
+      newState.topMoviePicks = [...this.props.topPicks];
+      newState.hasMovie = true;
+      this.setState(newState);
+      console.log(this.state.topMoviePicks);
+    }
+  }
   render() {
     let topMovies = <p>No TopPicks Available</p>;
-    if (this.state.topMoviePicks) {
+    if (this.state.hasMovie) {
       topMovies = (
         <Card className={"card ".concat(Classes.TopPicks_Card)}>
           <ListGroup variant="flush">
