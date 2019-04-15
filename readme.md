@@ -13,6 +13,30 @@ Time Used Approx.: 200 hour <br>
 
 This is company oriented project, done by author under the instruction of lecturer Veijö Väsäinen, Oulu University of Applied Sciencs. <br>
 Project, is making the Movie Application using MERN stack (i.e. Mongo Express React NodeJs )<br>
+Some features implemented in app:<br>
+
+1.  Restful Api
+2.  Use of Css modules
+3.  React-Redux for application state management
+4.  Dynamic UI like Input.
+5.  Use of Higher Order Component
+
+## App Info
+
+The project was originally pruposed to be a movie application. However,right now the project is just playing youtube videos.<br>
+Since, its a demo application until this date (15.04.2019), the application is not a complete app. Some functionalities available are as follows:<br>
+
+1.  Admin features right now accessible are movie and movie create,read, edit and delete.
+2.  User Authencation features
+3.  Movie Watch Page is Available to authenticated users only.
+
+ <br>
+ Some features for future developent: <br>
+ 1. Recommendation system
+ 2. User Profile
+ 3. Admin-User privileges
+ 4. User Comments, Movie likes and dislikes
+
 
 ## Heroku Link
 
