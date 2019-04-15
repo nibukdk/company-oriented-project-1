@@ -1,5 +1,5 @@
 const express = require("express"),
-  session = require("express-session"),
+  path = require("path"),
   bodyParser = require("body-parser"),
   passport = require("passport"),
   mongoose = require("mongoose"),
@@ -12,7 +12,7 @@ const express = require("express"),
 const Movie = require("./models/movie");
 
 //Set port for local server
-const PORT = 8080;
+const PORT = 8080 || process.env.PORT;
 
 //Import Routes
 const adminRoutes = require("./routes/admin/admin"),
@@ -41,15 +41,6 @@ app.use((req, res, next) => {
   res.locals.messages = require("express-messages")(req, res);
   next();
 });
-//use passport and set session
-// app.use(
-//   session({
-//     secret: "Login is necessary",
-//     resave: false,
-//     saveUninitialized: false,
-  
-//   })
-// );
 
 app.use(passport.initialize());
 //THis should always be declraed after express session
@@ -105,7 +96,15 @@ app.use("/movies", movieRoutes);
 app.use("/login", loginRoute);
 app.use("/register", registerRoute);
 
+//Serve file if in production mode
+if (process.env.NODE_ENV === "production") {
+  //Set static folder to index.html in build folder
+  app.use(express.static("frontend/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+  });
+}
 //Listen to port
-app.listen(PORT || process.env.PORT, err => {
+app.listen(PORT, err => {
   console.log("App is running at ", PORT);
 });
