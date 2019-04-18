@@ -45,5 +45,5 @@ Please go to this link for testing.
 
 ## References
 
-Mern Stack tutorial application: [ @ Brad Traversy ](https://www.udemy.com/mern-stack-front-to-back/) <br>
+Mern Stack tutorial: [ @ Brad Traversy ](https://www.udemy.com/mern-stack-front-to-back/) <br>
 React 16 tutorial : [@Maximilian Schwarzmüller](https://www.udemy.com/react-the-complete-guide-incl-redux/) <br>

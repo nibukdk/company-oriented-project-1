@@ -41,10 +41,10 @@ class Register extends Component {
         },
         value: ""
       },
-      password1: {
+      password: {
         attrs: {
           elType: "password",
-          elName: "password1",
+          elName: "password",
           className: "form-control",
           placeholder: "Password"
         },
@@ -52,7 +52,7 @@ class Register extends Component {
       },
       password2: {
         attrs: {
-          elType: "password",
+          elType: "password2",
           elName: "password2",
           className: "form-control invalid",
           placeholder: "Confirm Password"
@@ -89,7 +89,7 @@ class Register extends Component {
     const newUser = {
       name: this.state.userInfo.name.value,
       username: this.state.userInfo.username.value,
-      password: this.state.userInfo.password1.value,
+      password: this.state.userInfo.password.value,
       password2: this.state.userInfo.password2.value,
       email: this.state.userInfo.email.value
     };

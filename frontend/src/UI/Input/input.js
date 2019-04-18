@@ -13,7 +13,7 @@ const input = props => {
   switch (props.elType) {
     case "text":
       inputElement = (
-        <Form.Group controlId="formBasicText">
+        <Form.Group controlId={props.elName}>
           <Form.Label>{props.placeholder}</Form.Label>
           <Form.Control
             type="text"
@@ -31,7 +31,25 @@ const input = props => {
 
     case "password":
       inputElement = (
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group controlId={props.elName}>
+          <Form.Label> {props.placeholder} </Form.Label>
+          <Form.Control
+            type="password"
+            placeholder={props.placeholder}
+            name={props.elName}
+            value={props.elValue}
+            onChange={props.changed}
+          />
+          <Form.Text className="text-danger">
+            {formErorrObject[props.elName]}
+          </Form.Text>
+          
+        </Form.Group>
+      );
+      break;
+      case "password2":
+      inputElement = (
+        <Form.Group controlId={props.elName}>
           <Form.Label> {props.placeholder} </Form.Label>
           <Form.Control
             type="password"
@@ -95,7 +113,7 @@ const input = props => {
             onChange={props.changed}
           />
           <Form.Text className="text-danger">
-            {formErorrObject[props.elName]}{" "}
+            {formErorrObject[props.elName]}
           </Form.Text>
           
         </Form.Group>

@@ -26,11 +26,11 @@ router.post("/", (req, res) => {
   if (isValid) {
     User.findOne({ email: req.body.email }).then(user => {
       if (user) {
-        return res.status(400).json({ error: "Email already exists" });
+        return res.status(400).json({ email: "Email already exists" });
       }
       User.findOne({ username: req.body.username }).then(user => {
         if (user) {
-          return res.status(400).json({ error: "Username already exists" });
+          return res.status(400).json({ username: "Username already exists" });
         }
         const password = req.body.password;
         let emailDomain = req.body.email.split("@");
