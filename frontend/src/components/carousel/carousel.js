@@ -1,6 +1,7 @@
 import React from "react";
 import Classes from "./carousel.css";
 import Carousel from "react-bootstrap/Carousel";
+import Image from "react-bootstrap/Image";
 
 const carousel = props => {
   let carousel = <p>NO Recent Upload</p>;
@@ -9,10 +10,10 @@ const carousel = props => {
       <Carousel className={Classes.Header_Carousel}>
         {props.carouselMovies.map(movie => (
           <Carousel.Item key={movie._id}>
-            <img
-              className="d-block w-100"
+            <Image
               src={movie.image_url}
-              alt="First slide"
+              alt={movie.title}
+              className={Classes.Image}
             />
             <Carousel.Caption>
               <h3> {movie.title} </h3>
