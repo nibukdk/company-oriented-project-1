@@ -34,7 +34,7 @@ const movieItem = props => {
         </Card.Body>
         <footer className="blockquote-footer">
           <p>{props.upload_date.slice(0, 10)}</p>
-          <p>{props.uploaded_by}</p>
+         {/* <p>{props.uploaded_by}</p> */}
           <p> {movieEditLink}</p>
         </footer>
       </Card>
